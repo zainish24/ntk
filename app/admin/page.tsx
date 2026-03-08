@@ -44,34 +44,34 @@ export default async function AdminDashboard() {
     <div className="space-y-10">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Admin Dashboard</h1>
+        <h1 className="text-4xl font-bold text-foreground">Admin Dashboard</h1>
         <p className="text-muted-foreground/80">Real-time overview of NTR Properties platform</p>
       </div>
 
-      {/* Stats Grid - Vibrant Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+      {/* Stats Grid - Light Theme Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {stats.map((stat, idx) => {
           const Icon = stat.icon
-          const colors = [
-            'from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 hover:shadow-primary/20',
-            'from-secondary/20 to-secondary/5 border-secondary/30 hover:border-secondary/50 hover:shadow-secondary/20',
-            'from-accent/20 to-accent/5 border-accent/30 hover:border-accent/50 hover:shadow-accent/20',
-            'from-primary/15 to-secondary/15 border-primary/20 hover:border-primary/40 hover:shadow-primary/15',
-            'from-secondary/15 to-accent/15 border-secondary/20 hover:border-secondary/40 hover:shadow-secondary/15',
-            'from-accent/15 to-primary/15 border-accent/20 hover:border-accent/40 hover:shadow-accent/15'
+          const bgColors = [
+            'bg-gradient-to-br from-blue-50 to-white border-blue-200 hover:border-blue-300',
+            'bg-gradient-to-br from-yellow-50 to-white border-yellow-200 hover:border-yellow-300',
+            'bg-gradient-to-br from-green-50 to-white border-green-200 hover:border-green-300',
+            'bg-gradient-to-br from-red-50 to-white border-red-200 hover:border-red-300',
+            'bg-gradient-to-br from-purple-50 to-white border-purple-200 hover:border-purple-300',
+            'bg-gradient-to-br from-blue-50 to-white border-blue-200 hover:border-blue-300'
           ]
           
           return (
-            <div key={stat.title} className={`glass-effect rounded-xl p-6 border ${colors[idx % colors.length]} hover:shadow-lg transition-all duration-300`}>
+            <div key={stat.title} className={`${bgColors[idx % bgColors.length]} rounded-xl p-6 border hover:shadow-md transition-all`}>
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">{stat.title}</p>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{stat.title}</p>
                 </div>
-                <Icon className="h-5 w-5 text-muted-foreground/50" />
+                <Icon className={`h-5 w-5 ${stat.color}`} />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+              <div className={`text-3xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
               {stat.subtitle && (
-                <p className="text-xs text-muted-foreground/60">{stat.subtitle}</p>
+                <p className="text-xs text-muted-foreground">{stat.subtitle}</p>
               )}
             </div>
           )
@@ -79,19 +79,19 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Recent Submissions */}
-      <div className="glass-effect rounded-2xl border-border/30 p-8">
+      <div className="bg-white rounded-2xl border border-border/40 p-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-foreground">Recent Submissions</h2>
-            <p className="text-sm text-muted-foreground/70 mt-1">Latest property listings awaiting review</p>
+            <p className="text-sm text-muted-foreground/80 mt-1">Latest property listings awaiting review</p>
           </div>
-          <Link href="/admin/listings" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors px-4 py-2 rounded-lg hover:bg-primary/10">
+          <Link href="/admin/listings" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors px-4 py-2 rounded-lg hover:bg-blue-50">
             View All →
           </Link>
         </div>
         <div className="space-y-3">
           {recentListings?.map((listing) => (
-            <div key={listing.id} className="flex items-center justify-between p-4 rounded-xl bg-card/30 hover:bg-card/50 border border-border/20 hover:border-primary/30 transition-all">
+            <div key={listing.id} className="flex items-center justify-between p-4 rounded-xl bg-blue-50/30 hover:bg-blue-50/60 border border-border/40 hover:border-primary/40 transition-all">
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-foreground truncate hover:text-primary transition-colors">{listing.title}</h3>
                 <p className="text-sm text-muted-foreground/70 mt-1">
@@ -99,9 +99,9 @@ export default async function AdminDashboard() {
                 </p>
               </div>
               <Badge className={`ml-4 font-semibold ${
-                listing.status === 'pending' ? 'bg-amber-500/20 text-amber-200 border-amber-500/30' :
-                listing.status === 'approved' ? 'bg-emerald-500/20 text-emerald-200 border-emerald-500/30' : 
-                'bg-red-500/20 text-red-200 border-red-500/30'
+                listing.status === 'pending' ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
+                listing.status === 'approved' ? 'bg-green-100 text-green-800 border-green-200' : 
+                'bg-red-100 text-red-800 border-red-200'
               } border`}>
                 {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
               </Badge>
@@ -109,12 +109,11 @@ export default async function AdminDashboard() {
           ))}
           {!recentListings?.length && (
             <div className="text-center text-muted-foreground py-12">
-                No recent submissions
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+              No recent submissions
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

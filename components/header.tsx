@@ -71,34 +71,34 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-effect border-b border-border/30">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-border/40 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent text-white flex items-center justify-center font-bold text-sm group-hover:shadow-lg group-hover:shadow-primary/50 transition-all">
+          <Link href="/" className="flex items-center gap-2.5 group hover:opacity-80 transition-opacity">
+            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center font-bold text-sm">
               NTR
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">NTR</span>
-              <span className="text-xs text-muted-foreground/70">Properties</span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-lg font-bold text-primary">NTR</span>
+              <span className="text-xs text-muted-foreground">Properties</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-semibold text-muted-foreground/80 hover:text-primary transition-colors duration-300">
+            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link href="/listings" className="text-sm font-semibold text-muted-foreground/80 hover:text-secondary transition-colors duration-300">
+            <Link href="/listings" className="text-sm font-medium text-muted-foreground hover:text-secondary transition-colors">
               Properties
             </Link>
             {user && (
               <>
-                <Link href="/dashboard" className="text-sm font-semibold text-muted-foreground/80 hover:text-accent transition-colors duration-300">
+                <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                   Dashboard
                 </Link>
-                <Link href="/admin" className="text-sm font-semibold text-muted-foreground/80 hover:text-primary transition-colors duration-300">
+                <Link href="/admin" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                   Admin
                 </Link>
               </>
@@ -106,25 +106,25 @@ export function Header() {
           </nav>
 
           {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             {user ? (
               <>
-                <Button asChild size="sm" className="bg-gradient-to-r from-secondary to-accent hover:shadow-lg hover:shadow-secondary/50 text-foreground font-semibold transition-all">
+                <Button asChild size="sm" className="bg-secondary hover:bg-secondary/90 text-white font-semibold rounded-lg py-2">
                   <Link href="/dashboard/post">+ Post Property</Link>
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="sm" className="gap-2 glass-effect hover:bg-primary/20 border-primary/30 text-foreground">
+                    <Button size="sm" className="gap-2 bg-white border border-border hover:bg-blue-50 text-foreground rounded-lg">
                       <UserIcon className="h-4 w-4" />
                       Menu
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="glass-effect border-primary/30">
+                  <DropdownMenuContent align="end" className="border border-border/40 bg-white">
                     <DropdownMenuItem asChild className="cursor-pointer">
                       <Link href="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator className="bg-primary/20" />
-                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-400">
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600">
                       <LogOut className="h-4 w-4 mr-2" />
                       Sign Out
                     </DropdownMenuItem>
@@ -132,7 +132,7 @@ export function Header() {
                 </DropdownMenu>
               </>
             ) : (
-              <Button asChild size="sm" className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/50 font-semibold">
+              <Button asChild size="sm" className="bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg py-2">
                 <Link href="/auth/login">Sign In</Link>
               </Button>
             )}

@@ -58,108 +58,182 @@ export default async function HomePage() {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section - Premium Vibrant Design */}
-        <section className="relative bg-gradient-to-b from-background via-card/50 to-background border-b border-border/30 overflow-hidden">
-          {/* Background Decoration */}
+        {/* Full-Width Hero Section */}
+        <section className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-b border-border/40 overflow-hidden">
+          {/* Decorative Elements */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div className="absolute -top-64 -right-64 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
           </div>
           
-          <div className="container mx-auto px-4 py-16 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <Badge className="mb-4 bg-primary/20 text-primary border-primary/30 font-semibold px-4 py-1.5">
-                  ✨ Premium Real Estate Platform
-                </Badge>
-                <h1 className="text-5xl md:text-6xl font-bold text-center bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4 leading-tight">
-                  Find Your Perfect Property
-                </h1>
-                <p className="text-center text-muted-foreground/90 mb-10 text-lg max-w-2xl mx-auto">
-                  Explore premium residential plots and commercial spaces in North Town Residency, Karachi
-                </p>
+          <div className="container mx-auto px-4 py-24 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Content */}
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Badge className="bg-primary/10 text-primary border-primary/30 font-semibold px-4 py-2">
+                    Welcome to North Town
+                  </Badge>
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+                    Find Your <span className="text-primary">Perfect</span> <span className="text-secondary">Property</span>
+                  </h1>
+                  <p className="text-lg text-muted-foreground/80 leading-relaxed max-w-xl">
+                    Discover premium residential plots and commercial spaces in North Town Residency, Karachi's most sought-after community.
+                  </p>
+                </div>
+                
+                <div className="flex flex-wrap gap-4">
+                  <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg">
+                    <Link href="/listings" className="flex items-center gap-2">
+                      <Search className="h-5 w-5" />
+                      Browse Properties
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary/10 font-bold py-3 px-8 rounded-lg">
+                    <Link href="/auth/login" className="flex items-center gap-2">
+                      <Building2 className="h-5 w-5" />
+                      Post Property
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="flex gap-12 pt-8 border-t border-border">
+                  <div>
+                    <div className="text-3xl font-bold text-primary">{totalListings || 0}+</div>
+                    <p className="text-sm text-muted-foreground font-medium">Active Properties</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-secondary">3</div>
+                    <p className="text-sm text-muted-foreground font-medium">Phases</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-accent">1000+</div>
+                    <p className="text-sm text-muted-foreground font-medium">Happy Clients</p>
+                  </div>
+                </div>
               </div>
-              
-              {/* Search Bar */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                <div className="md:col-span-2 group">
-                  <label className="block text-sm font-semibold text-foreground/80 mb-2">Location</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter location, phase, or block" 
-                    className="w-full px-5 py-3 bg-card/50 border border-border/50 rounded-xl text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all group-hover:border-primary/30"
-                  />
-                </div>
-                <div className="group">
-                  <label className="block text-sm font-semibold text-foreground/80 mb-2">Property Type</label>
-                  <select className="w-full px-5 py-3 bg-card/50 border border-border/50 rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all group-hover:border-secondary/30">
-                    <option>All Types</option>
-                    <option>Residential Plot</option>
-                    <option>Commercial Shop</option>
-                  </select>
-                </div>
-                <div className="group">
-                  <label className="block text-sm font-semibold text-foreground/80 mb-2">Price Range</label>
-                  <select className="w-full px-5 py-3 bg-card/50 border border-border/50 rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all group-hover:border-accent/30">
-                    <option>Any Price</option>
-                    <option>0 - 5M</option>
-                    <option>5M - 10M</option>
-                    <option>10M+</option>
-                  </select>
-                </div>
+
+              {/* Right Image */}
+              <div className="relative h-96 lg:h-full min-h-96 rounded-2xl overflow-hidden glass-effect border border-border">
+                <img
+                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=500&fit=crop"
+                  alt="North Town Properties"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
               </div>
+            </div>
+          </div>
+        </section>
               
-              <Button className="w-full bg-gradient-to-r from-primary via-secondary to-accent hover:shadow-xl hover:shadow-primary/30 text-white font-bold py-3 text-lg rounded-xl transition-all">
-                <Search className="h-5 w-5 mr-2" />
-                Search Properties
-              </Button>
+
             </div>
           </div>
         </section>
 
 
-        {/* Quick Stats - Vibrant Cards */}
-        <section className="py-16 bg-gradient-to-b from-background to-card/30 border-b border-border/30">
+        {/* Advanced Search Bar Section */}
+        <section className="bg-white border-b border-border/40">
+          <div className="container mx-auto px-4 py-12">
+            <div className="glass-effect rounded-2xl p-8 border border-border/40">
+              <h2 className="text-2xl font-bold text-foreground mb-6">Advanced Search</h2>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">Location</label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter location or block" 
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">Property Type</label>
+                  <select className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
+                    <option>All Types</option>
+                    <option>Residential Plot</option>
+                    <option>Commercial Shop</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">Phase</label>
+                  <select className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
+                    <option>All Phases</option>
+                    <option>Phase 1</option>
+                    <option>Phase 2</option>
+                    <option>Phase 4</option>
+                  </select>
+                </div>
+                <div className="flex items-end">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg py-2.5">
+                    <Search className="h-4 w-4 mr-2" />
+                    Search
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Information & Benefits Section */}
+        <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5 border-b border-border/40">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { number: totalListings || 0, label: 'Active Properties', icon: '🏠', color: 'from-primary to-primary/50' },
-                { number: 3, label: 'Phases', icon: '📍', color: 'from-secondary to-secondary/50' },
-                { number: '100%', label: 'Verified', icon: '✓', color: 'from-accent to-accent/50' },
-                { number: '1000+', label: 'Happy Buyers', icon: '😊', color: 'from-primary via-secondary to-accent' }
-              ].map((stat, i) => (
-                <div key={i} className="glass-effect rounded-2xl p-6 text-center group hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/20">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{stat.icon}</div>
-                  <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
-                    {stat.number}+
-                  </div>
-                  <div className="text-sm text-muted-foreground/80 font-medium">{stat.label}</div>
+                { icon: '🏆', title: 'Award Winning', desc: 'Recognized community' },
+                { icon: '🔒', title: '24/7 Security', desc: 'Safe environment' },
+                { icon: '🌳', title: 'Green Spaces', desc: 'Parks & recreation' },
+                { icon: '📍', title: 'Prime Location', desc: 'Easy access' }
+              ].map((item, i) => (
+                <div key={i} className="bg-white rounded-xl p-6 border border-border/40 hover:shadow-md transition-all">
+                  <div className="text-4xl mb-3">{item.icon}</div>
+                  <h3 className="font-bold text-foreground mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Popular Locations - Vibrant Grid */}
-        <section className="py-16 bg-background">
+        {/* Quick Stats - Light Theme Cards */}
+        <section className="py-16 bg-white border-b border-border/40">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { number: totalListings || 0, label: 'Active Properties', icon: '🏠' },
+                { number: 3, label: 'Phases', icon: '📍' },
+                { number: '100%', label: 'Verified', icon: '✓' },
+                { number: '1000+', label: 'Happy Buyers', icon: '👥' }
+              ].map((stat, i) => (
+                <div key={i} className="bg-gradient-to-br from-primary/5 to-transparent rounded-xl p-6 border border-primary/20 hover:border-primary/40 hover:shadow-md transition-all text-center">
+                  <div className="text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl font-bold text-primary mb-1">{stat.number}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Popular Locations Section */}
+        <section className="py-20 bg-white border-b border-border/40">
           <div className="container mx-auto px-4">
             <div className="mb-12">
-              <h2 className="text-4xl font-bold mb-2">Popular Locations in NTR</h2>
-              <p className="text-muted-foreground/80">Explore premium properties across all phases and blocks</p>
+              <h2 className="text-4xl font-bold text-foreground mb-2">Popular Locations</h2>
+              <p className="text-muted-foreground/80">Explore premium properties across all phases</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[
-                { name: 'Phase 1', count: '450+', color: 'from-primary/20 to-primary/5', border: 'border-primary/30' },
-                { name: 'Phase 2', count: '320+', color: 'from-secondary/20 to-secondary/5', border: 'border-secondary/30' },
-                { name: 'Phase 4', count: '280+', color: 'from-accent/20 to-accent/5', border: 'border-accent/30' },
-                { name: 'Titanium', count: '150+', color: 'from-primary/15 to-secondary/15', border: 'border-primary/20' },
-                { name: 'Diamond', count: '200+', color: 'from-secondary/15 to-accent/15', border: 'border-secondary/20' },
-                { name: 'Emerald', count: '180+', color: 'from-accent/15 to-primary/15', border: 'border-accent/20' }
+                { name: 'Phase 1', count: '450+' },
+                { name: 'Phase 2', count: '320+' },
+                { name: 'Phase 4', count: '280+' },
+                { name: 'Titanium', count: '150+' },
+                { name: 'Diamond', count: '200+' },
+                { name: 'Emerald', count: '180+' }
               ].map((location) => (
                 <Link key={location.name} href={`/listings?phase=${location.name}`} className="group">
-                  <div className={`bg-gradient-to-br ${location.color} p-5 rounded-xl border ${location.border} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300`}>
-                    <div className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">{location.name}</div>
-                    <div className="text-sm text-muted-foreground/70 group-hover:text-muted-foreground">{location.count} properties</div>
+                  <div className="bg-gradient-to-br from-blue-50 to-white p-5 rounded-xl border border-border hover:border-primary hover:shadow-md transition-all">
+                    <h3 className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">{location.name}</h3>
+                    <p className="text-sm text-muted-foreground/70">{location.count} properties</p>
                   </div>
                 </Link>
               ))}
@@ -167,124 +241,132 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* North Town Residency Showcase */}
-        <section className="py-20 bg-gradient-to-b from-card/50 to-background border-b border-border/30">
+        {/* North Town About Section - WordPress Style */}
+        <section className="py-20 bg-gradient-to-br from-secondary/5 to-primary/5 border-b border-border/40">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Images Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2 h-64 rounded-2xl overflow-hidden glass-effect border-border/30">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+              {/* Images - Left Sidebar */}
+              <div className="grid grid-cols-1 gap-4">
+                <div className="h-72 rounded-xl overflow-hidden border border-border shadow-md">
                   <img 
-                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=500&fit=crop" 
-                    alt="North Town Residency Main" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=400&fit=crop" 
+                    alt="North Town Main" 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
-                <div className="h-48 rounded-xl overflow-hidden glass-effect border-border/30">
-                  <img 
-                    src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop" 
-                    alt="Residential Plot" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="h-48 rounded-xl overflow-hidden glass-effect border-border/30">
-                  <img 
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" 
-                    alt="Commercial Space" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="h-48 rounded-lg overflow-hidden border border-border shadow-md">
+                    <img 
+                      src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=300&h=250&fit=crop" 
+                      alt="Residential" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <div className="h-48 rounded-lg overflow-hidden border border-border shadow-md">
+                    <img 
+                      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&h=250&fit=crop" 
+                      alt="Commercial" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="space-y-8">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-8">
                 <div>
-                  <Badge className="mb-4 bg-secondary/20 text-secondary border-secondary/30 font-semibold px-4 py-1.5">
-                    About North Town
-                  </Badge>
-                  <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
-                    North Town Residency
+                  <span className="inline-block px-4 py-2 rounded-full bg-secondary/15 text-secondary font-semibold text-sm mb-4">About North Town</span>
+                  <h2 className="text-5xl font-bold text-foreground mb-6 leading-tight">
+                    Discover <span className="text-primary">North Town</span> Residency
                   </h2>
-                  <p className="text-muted-foreground/80 text-lg leading-relaxed">
-                    North Town Residency is one of Karachi's most sought-after residential communities, offering premium plots and commercial spaces across multiple phases.
+                  <p className="text-lg text-muted-foreground/80 leading-relaxed mb-6">
+                    North Town Residency stands as Karachi's premier residential destination, offering an exceptional blend of modern living, security, and community values. With carefully planned phases featuring residential plots and commercial spaces, it's where dreams become reality.
+                  </p>
+                  <p className="text-lg text-muted-foreground/80 leading-relaxed">
+                    Every property in North Town is a testament to quality construction, strategic location, and investment potential.
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                {/* Features Grid */}
+                <div className="grid grid-cols-2 gap-6">
                   {[
-                    { icon: '🏘️', title: 'Premium Society', desc: 'Award-winning planned community' },
-                    { icon: '🛡️', title: '24/7 Security', desc: 'State-of-the-art security systems' },
-                    { icon: '🌳', title: 'Green Spaces', desc: 'Parks and recreational areas' },
-                    { icon: '🚗', title: 'Prime Location', desc: 'Easy access to main highways' }
+                    { icon: '🏆', title: 'Award Winning', desc: 'Recognized excellence' },
+                    { icon: '🔒', title: '24/7 Security', desc: 'Complete protection' },
+                    { icon: '🌳', title: 'Green Spaces', desc: 'Beautiful parks' },
+                    { icon: '📍', title: 'Prime Location', desc: 'Easy accessibility' }
                   ].map((feature, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <span className="text-3xl">{feature.icon}</span>
-                      <div>
-                        <h4 className="font-bold text-foreground">{feature.title}</h4>
-                        <p className="text-sm text-muted-foreground/70">{feature.desc}</p>
-                      </div>
+                    <div key={i} className="bg-white rounded-lg p-5 border border-border/40 hover:border-primary/40 hover:shadow-md transition-all">
+                      <div className="text-3xl mb-2">{feature.icon}</div>
+                      <h4 className="font-bold text-foreground text-sm mb-1">{feature.title}</h4>
+                      <p className="text-xs text-muted-foreground">{feature.desc}</p>
                     </div>
                   ))}
                 </div>
 
-                <Button asChild className="w-full bg-gradient-to-r from-primary via-secondary to-accent hover:shadow-xl hover:shadow-primary/30 text-white font-bold py-3 text-base rounded-xl">
-                  <Link href="/listings">Explore All Properties</Link>
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg w-full sm:w-fit">
+                  <Link href="/listings" className="flex items-center justify-center gap-2">
+                    Explore Properties
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Property Types - Premium Cards */}
-        <section className="py-20 bg-background border-b border-border/30">
+        {/* Property Types Section */}
+        <section className="py-20 bg-white border-b border-border/40">
           <div className="container mx-auto px-4">
             <div className="mb-12">
-              <h2 className="text-4xl font-bold mb-2">Property Types</h2>
-              <p className="text-muted-foreground/80">Choose from our diverse range of properties</p>
+              <h2 className="text-4xl font-bold text-foreground mb-2">Property Types</h2>
+              <p className="text-muted-foreground/80">Explore our diverse property offerings</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Link href="/listings?property_type=residential_plot">
-                <div className="group glass-effect rounded-2xl p-8 border-border/30 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all cursor-pointer">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:shadow-lg group-hover:shadow-primary/30 transition-all">
+                <div className="group bg-gradient-to-br from-primary/10 to-blue-50 rounded-2xl p-10 border border-primary/20 hover:border-primary hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="h-16 w-16 rounded-xl bg-primary/20 flex items-center justify-center">
                       <Home className="h-8 w-8 text-primary" />
                     </div>
-                    <ArrowRight className="h-6 w-6 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+                    <ArrowRight className="h-6 w-6 text-primary/50 group-hover:text-primary transition-colors" />
                   </div>
-                  <h3 className="font-bold text-2xl text-foreground group-hover:text-primary transition-colors mb-2">Residential Plots</h3>
-                  <p className="text-muted-foreground/70">80, 100, 120 Sq Yd premium plots</p>
+                  <h3 className="font-bold text-2xl text-foreground mb-3 group-hover:text-primary transition-colors">Residential Plots</h3>
+                  <p className="text-muted-foreground/80 mb-4">Premium plots in various sizes including 80, 100, and 120 Sq Yd</p>
+                  <div className="text-sm font-semibold text-primary">450+ Available</div>
                 </div>
               </Link>
 
               <Link href="/listings?property_type=commercial_shop">
-                <div className="group glass-effect rounded-2xl p-8 border-border/30 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/20 transition-all cursor-pointer">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-accent/20 to-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:shadow-lg group-hover:shadow-accent/30 transition-all">
-                      <Store className="h-8 w-8 text-accent" />
+                <div className="group bg-gradient-to-br from-secondary/10 to-green-50 rounded-2xl p-10 border border-secondary/20 hover:border-secondary hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="h-16 w-16 rounded-xl bg-secondary/20 flex items-center justify-center">
+                      <Store className="h-8 w-8 text-secondary" />
                     </div>
-                    <ArrowRight className="h-6 w-6 text-muted-foreground/50 group-hover:text-accent transition-colors" />
+                    <ArrowRight className="h-6 w-6 text-secondary/50 group-hover:text-secondary transition-colors" />
                   </div>
-                  <h3 className="font-bold text-2xl text-foreground group-hover:text-accent transition-colors mb-2">Commercial Shops</h3>
-                  <p className="text-muted-foreground/70">Prime business locations & spaces</p>
+                  <h3 className="font-bold text-2xl text-foreground mb-3 group-hover:text-secondary transition-colors">Commercial Shops</h3>
+                  <p className="text-muted-foreground/80 mb-4">Prime business locations ideal for retail, offices, and commercial ventures</p>
+                  <div className="text-sm font-semibold text-secondary">200+ Available</div>
                 </div>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Featured Properties - Premium Grid */}
+        {/* Featured Properties Section */}
         {listings && listings.length > 0 && (
-          <section className="py-20 bg-gradient-to-b from-background to-card/30 border-b border-border/30">
+          <section className="py-20 bg-blue-50 border-b border-border/40">
             <div className="container mx-auto px-4">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 gap-8">
                 <div>
-                  <h2 className="text-4xl font-bold mb-2">Featured Properties</h2>
-                  <p className="text-muted-foreground/80">Discover premium listings handpicked for you</p>
+                  <span className="inline-block px-4 py-2 rounded-full bg-primary/15 text-primary font-semibold text-sm mb-4">Featured Listings</span>
+                  <h2 className="text-5xl font-bold text-foreground mb-3">Latest Properties</h2>
+                  <p className="text-lg text-muted-foreground/80">Handpicked premium properties for our clients</p>
                 </div>
-                <Button asChild className="bg-gradient-to-r from-secondary to-accent hover:shadow-lg hover:shadow-secondary/30 text-foreground font-semibold w-fit">
-                  <Link href="/listings" className="flex items-center gap-2">
-                    View All Properties
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-lg w-full lg:w-fit">
+                  <Link href="/listings" className="flex items-center justify-center lg:justify-start gap-2">
+                    View All
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
@@ -301,25 +383,30 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* CTA Section - Premium */}
-        <section className="py-20 bg-gradient-to-r from-background via-card/50 to-background border-t border-border/30">
+        {/* CTA Section - WordPress Style */}
+        <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5 border-t border-border/40">
           <div className="container mx-auto px-4">
-            <div className="glass-effect rounded-3xl p-12 md:p-16 border-primary/20 bg-gradient-to-r from-primary/10 via-secondary/5 to-accent/10 relative overflow-hidden">
+            <div className="bg-gradient-to-r from-primary via-primary/90 to-secondary rounded-2xl p-12 md:p-16 text-white relative overflow-hidden shadow-lg">
               {/* Decoration */}
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary/5 rounded-full blur-3xl"></div>
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
               </div>
               
               <div className="max-w-3xl relative z-10">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  Ready to List Your Property?
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  Have a Property to Sell?
                 </h2>
-                <p className="text-lg text-muted-foreground/80 mb-8 leading-relaxed">
-                  Join thousands of successful property owners who trust NTR Properties. List your residential plots and commercial spaces for free and reach thousands of potential buyers.
+                <p className="text-lg text-white/90 mb-8 leading-relaxed">
+                  Join thousands of satisfied property owners on North Town Properties. List your residential plots or commercial spaces completely free and connect with serious buyers in minutes.
                 </p>
-                <Button asChild className="bg-gradient-to-r from-primary via-secondary to-accent hover:shadow-xl hover:shadow-primary/40 text-white font-bold text-lg px-8 py-6 rounded-xl">
-                  <Link href="/auth/login">Start Listing Now - It's Free!</Link>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button asChild className="bg-white hover:bg-white/95 text-primary font-bold py-3 px-8 rounded-lg">
+                    <Link href="/auth/login">Post Your Property Free</Link>
+                  </Button>
+                  <Button asChild variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg">
+                    <Link href="/listings">Browse Properties</Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

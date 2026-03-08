@@ -4,40 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Premium Vibrant Real Estate Theme - Dark Navy with Purple & Teal */
-  --background: 13 15 35; /* #0D0F23 - Deep Navy-Black */
-  --foreground: 248 250 255; /* #F8FAFF - Almost White */
-  --card: 30 35 65; /* #1E2341 - Dark Navy */
-  --card-foreground: 248 250 255;
-  --popover: 30 35 65;
-  --popover-foreground: 248 250 255;
-  --primary: 139 92 246; /* #8B5CF6 - Vibrant Purple */
-  --primary-foreground: 248 250 255;
-  --secondary: 6 182 212; /* #06B6D4 - Vibrant Cyan/Teal */
-  --secondary-foreground: 13 15 35;
-  --muted: 148 163 184; /* #94A3B8 - Medium Gray */
-  --muted-foreground: 200 210 230;
-  --accent: 245 158 11; /* #F59E0B - Vibrant Gold/Amber */
-  --accent-foreground: 13 15 35;
-  --success: 34 197 94; /* #22C55E - Vibrant Green */
-  --destructive: 239 68 68;
+  /* North Town Light Theme - Based on Logo Colors */
+  --background: 250 252 255; /* #FAFCFF - Light Blue Background */
+  --foreground: 15 45 90; /* #0F2D5A - Deep Blue Text */
+  --card: 255 255 255; /* #FFFFFF - Pure White Cards */
+  --card-foreground: 15 45 90;
+  --popover: 255 255 255;
+  --popover-foreground: 15 45 90;
+  --primary: 33 150 243; /* #2196F3 - North Town Sky Blue */
+  --primary-foreground: 255 255 255;
+  --secondary: 76 175 80; /* #4CAF50 - North Town Green */
+  --secondary-foreground: 255 255 255;
+  --muted: 144 160 184; /* #90A0B8 - Soft Gray */
+  --muted-foreground: 80 100 130;
+  --accent: 255 193 7; /* #FFC107 - North Town Gold */
+  --accent-foreground: 15 45 90;
+  --success: 76 175 80; /* Green */
+  --destructive: 244 67 54;
   --destructive-foreground: 255 255 255;
-  --border: 59 70 120; /* Dark Purple-Blue Border */
-  --input: 30 35 65;
-  --ring: 139 92 246;
+  --border: 200 220 240; /* Light Blue Border */
+  --input: 240 248 255;
+  --ring: 33 150 243;
   --radius: 0.875rem; /* 14px rounded cards */
 }
 
 .dark {
-  --background: 13 15 35;
-  --foreground: 248 250 255;
-  --card: 30 35 65;
-  --card-foreground: 248 250 255;
-  --primary: 168 85 247;
-  --primary-foreground: 13 15 35;
-  --accent: 245 158 11;
-  --accent-foreground: 13 15 35;
-  --border: 59 70 120;
+  --background: 20 40 80;
+  --foreground: 240 248 255;
+  --card: 30 50 90;
+  --card-foreground: 240 248 255;
+  --primary: 100 180 255;
+  --primary-foreground: 255 255 255;
+  --accent: 255 193 7;
+  --accent-foreground: 20 40 80;
+  --border: 50 80 130;
 }
 
 @theme inline {
@@ -163,20 +163,20 @@
 .animation-delay-700 { animation-delay: 700ms; }
 .animation-delay-800 { animation-delay: 800ms; }
 
-/* Premium Glass Morphism Effect */
+/* Premium Glass Morphism Effect - Light Theme */
 .glass-effect {
-  background: rgba(30, 35, 65, 0.4);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+  border: 1.5px solid rgba(33, 150, 243, 0.15);
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.08);
 }
 
 .glass-effect-light {
-  background: rgba(248, 250, 255, 0.05);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(6, 182, 212, 0.15);
+  border: 1.5px solid rgba(76, 175, 80, 0.15);
 }
 
 /* Smooth Transitions */
@@ -215,15 +215,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(30, 35, 65, 0.3);
+  background: rgba(33, 150, 243, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgb(139, 92, 246), rgb(6, 182, 212));
+  background: linear-gradient(180deg, rgb(33, 150, 243), rgb(76, 175, 80));
   border-radius: 5px;
-  border: 2px solid rgba(30, 35, 65, 0.5);
+  border: 2px solid rgba(33, 150, 243, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgb(168, 85, 247), rgb(34, 211, 238));
+  background: linear-gradient(180deg, rgb(13, 110, 210), rgb(56, 142, 60));
 }

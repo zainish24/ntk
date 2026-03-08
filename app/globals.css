@@ -4,39 +4,39 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Modern Real Estate Theme - Purple Accent */
-  --background: 248 249 251; /* #F8F9FB */
-  --foreground: 15 23 42; /* #0F172A */
-  --card: 255 255 255; /* #FFFFFF */
-  --card-foreground: 15 23 42;
-  --popover: 255 255 255;
-  --popover-foreground: 15 23 42;
-  --primary: 110 94 246; /* #6E5EF6 - Soft Purple */
-  --primary-foreground: 255 255 255;
-  --secondary: 241 245 249;
-  --secondary-foreground: 15 23 42;
-  --muted: 241 245 249;
-  --muted-foreground: 100 116 139;
-  --accent: 110 94 246;
-  --accent-foreground: 255 255 255;
-  --destructive: 239 68 68;
+  /* Premium Real Estate Theme - Terracotta/Rust & Cream */
+  --background: 252 248 243; /* #FCF8F3 - Soft Cream */
+  --foreground: 42 33 27; /* #2A211B - Deep Brown */
+  --card: 255 252 247; /* #FFFCF7 - Off-white Cream */
+  --card-foreground: 42 33 27;
+  --popover: 255 252 247;
+  --popover-foreground: 42 33 27;
+  --primary: 196 119 90; /* #C4775A - Warm Terracotta */
+  --primary-foreground: 255 252 247;
+  --secondary: 229 200 178; /* #E5C8B2 - Light Tan */
+  --secondary-foreground: 42 33 27;
+  --muted: 217 204 191; /* #D9CCBF - Muted Taupe */
+  --muted-foreground: 101 91 81;
+  --accent: 102 81 59; /* #665B3B - Deep Gold/Brown */
+  --accent-foreground: 255 252 247;
+  --destructive: 220 38 38;
   --destructive-foreground: 255 255 255;
-  --border: 229 231 235; /* #E5E7EB */
-  --input: 229 231 235;
-  --ring: 110 94 246;
+  --border: 229 200 178; /* Light Tan Border */
+  --input: 229 200 178;
+  --ring: 196 119 90;
   --radius: 1.25rem; /* 20px rounded cards */
 }
 
 .dark {
-  --background: 31 41 55;
-  --foreground: 248 249 250;
-  --card: 55 65 81;
-  --card-foreground: 248 249 250;
-  --primary: 25 135 84;
-  --primary-foreground: 255 255 255;
-  --accent: 212 175 55;
-  --accent-foreground: 31 41 55;
-  --border: 75 85 99;
+  --background: 28 22 18;
+  --foreground: 252 248 243;
+  --card: 42 33 27;
+  --card-foreground: 252 248 243;
+  --primary: 196 119 90;
+  --primary-foreground: 252 248 243;
+  --accent: 229 200 178;
+  --accent-foreground: 42 33 27;
+  --border: 67 56 46;
 }
 
 @theme inline {
@@ -76,7 +76,7 @@
   }
 }
 
-/* Animations */
+/* Premium Animations */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -106,6 +106,22 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(196, 119, 90, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(196, 119, 90, 0.5); }
+}
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
 .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
@@ -114,9 +130,71 @@
 .animate-slide-right { animation: slide-right 0.8s ease-out forwards; }
 .animate-scroll { animation: scroll 2s ease-in-out infinite; }
 .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+.animate-float-up { animation: float-up 0.6s ease-out forwards; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-scale-in { animation: scale-in 0.5s ease-out forwards; }
+
 .animation-delay-100 { animation-delay: 100ms; }
 .animation-delay-200 { animation-delay: 200ms; }
 .animation-delay-300 { animation-delay: 300ms; }
 .animation-delay-400 { animation-delay: 400ms; }
 .animation-delay-500 { animation-delay: 500ms; }
 .animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+
+/* Glass Morphism Effect */
+.glass-effect {
+  background: rgba(255, 252, 247, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 119, 90, 0.1);
+}
+
+/* Smooth Transitions */
+.smooth-transition {
+  @apply transition-all duration-500 ease-out;
+}
+
+/* Hero Text Gradient */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+}
+
+/* Premium Hover Effects */
+.premium-hover {
+  @apply transition-all duration-500 hover:scale-105 hover:shadow-2xl;
+}
+
+/* Card Hover Lift */
+.card-hover {
+  @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl;
+}
+
+/* Button Premium Style */
+.btn-premium {
+  @apply font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+}
+
+/* Section Divider */
+.section-divider {
+  @apply border-t border-border/30;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 252, 247, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(196, 119, 90);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(160, 90, 60);
+}

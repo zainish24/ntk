@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Merriweather } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const merriweather = Merriweather({ subsets: ['latin'], weight: ['300', '400', '700', '900'], variable: '--font-serif' })
 
 export const metadata: Metadata = {
   title: {
@@ -44,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-screen bg-background text-foreground" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${merriweather.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen bg-background text-foreground scroll-smooth" suppressHydrationWarning>
         {children}
       </body>
     </html>

@@ -106,10 +106,10 @@ async function ListingsContent({ searchParams }: ListingsPageProps) {
     <>
       {listings && listings.length > 0 ? (
         <>
-          <p className="text-sm text-muted-foreground mb-6">
-            Showing {listings.length} of {count || 0} properties
+          <p className="text-sm text-muted-foreground mb-8 font-medium">
+            Showing {listings.length} of {count || 0} premium properties
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {listings.map((listing: Listing) => (
               <EnhancedPropertyCard key={listing.id} listing={listing} />
             ))}
@@ -168,15 +168,15 @@ export default async function ListingsPage(props: ListingsPageProps) {
     .order('name')
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-card/50">
       <Header />
 
-      <main className="flex-1 py-8">
+      <main className="flex-1 py-12">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Properties in North Town Residency</h1>
-            <p className="text-muted-foreground">
-              Find your perfect property in NTR Karachi
+          <div className="mb-12 space-y-3 animate-fade-in">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground">Properties in North Town Residency</h1>
+            <p className="text-lg text-muted-foreground font-medium max-w-2xl">
+              Find your perfect property in NTR Karachi - handpicked premium listings
             </p>
           </div>
 

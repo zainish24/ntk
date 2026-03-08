@@ -4,104 +4,57 @@ import { Building2, Phone, Mail, MapPin } from 'lucide-react'
 export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="container mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
-          <div className="md:col-span-1 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-white">
-                <Building2 className="h-5 w-5" />
+          <div className="space-y-2">
+            <Link href="/" className="flex items-center gap-2 font-bold text-foreground hover:text-primary transition-colors">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                <Building2 className="h-4 w-4" />
               </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-base font-bold text-foreground">NTR Properties</span>
-                <span className="text-xs text-muted-foreground">North Town</span>
-              </div>
+              NTR Properties
             </Link>
-            <p className="text-sm text-muted-foreground/80 leading-relaxed">
-              Your trusted platform for buying, selling, and renting premium properties in North Town Residency, Karachi.
+            <p className="text-sm text-muted-foreground/80">
+              North Town Residency's property marketplace.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Quick Links</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/listings" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  All Properties
-                </Link>
-              </li>
-              <li>
-                <Link href="/listings?property_type=residential_plot" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Residential Plots
-                </Link>
-              </li>
-              <li>
-                <Link href="/listings?property_type=commercial_shop" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Commercial Shops
-                </Link>
-              </li>
-              <li>
-                <Link href="/auth/login" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Post Your Ad
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Phases */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">NTR Phases</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/listings?phase=phase-1" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Phase 1
-                </Link>
-              </li>
-              <li>
-                <Link href="/listings?phase=phase-2" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Phase 2
-                </Link>
-              </li>
-              <li>
-                <Link href="/listings?phase=phase-4" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-                  Phase 4
-                </Link>
-              </li>
+          {/* Links */}
+          <div className="space-y-2">
+            <h4 className="font-bold text-foreground text-sm">Quick Links</h4>
+            <ul className="space-y-1.5 text-sm">
+              <li><Link href="/listings" className="text-muted-foreground/80 hover:text-primary">All Properties</Link></li>
+              <li><Link href="/listings?property_type=residential_plot" className="text-muted-foreground/80 hover:text-primary">Residential</Link></li>
+              <li><Link href="/listings?property_type=commercial_shop" className="text-muted-foreground/80 hover:text-primary">Commercial</Link></li>
+              <li><Link href="/auth/login" className="text-muted-foreground/80 hover:text-primary">Post Property</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Contact</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-3 text-muted-foreground/80 hover:text-primary transition-colors">
-                <MapPin className="h-4 w-4 mt-1 shrink-0 text-primary" />
-                <span className="font-medium">North Town Residency, Karachi</span>
+          <div className="space-y-2">
+            <h4 className="font-bold text-foreground text-sm">Contact</h4>
+            <ul className="space-y-1.5 text-sm">
+              <li className="flex items-center gap-2 text-muted-foreground/80">
+                <MapPin className="h-4 w-4 text-primary shrink-0" />
+                <span>North Town, Karachi</span>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground/80 hover:text-primary transition-colors">
-                <Phone className="h-4 w-4 shrink-0 text-primary" />
-                <span className="font-medium">+92 300 1234567</span>
+              <li className="flex items-center gap-2 text-muted-foreground/80">
+                <Phone className="h-4 w-4 text-primary shrink-0" />
+                <span>+92 300 1234567</span>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground/80 hover:text-primary transition-colors">
-                <Mail className="h-4 w-4 shrink-0 text-primary" />
-                <span className="font-medium">info@ntrproperties.pk</span>
+              <li className="flex items-center gap-2 text-muted-foreground/80">
+                <Mail className="h-4 w-4 text-primary shrink-0" />
+                <span>info@ntrproperties.pk</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-border/40 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm text-muted-foreground/80 font-medium">
-            {new Date().getFullYear()} NTR Properties. All rights reserved.
-          </p>
-          <div className="flex gap-8 text-sm">
-            <Link href="/privacy" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-muted-foreground/80 hover:text-primary transition-colors font-medium">
-              Terms of Service
-            </Link>
+        <div className="border-t border-border/40 pt-6 flex justify-between items-center text-xs text-muted-foreground/80">
+          <p>{new Date().getFullYear()} NTR Properties. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-primary">Privacy</Link>
+            <Link href="/terms" className="hover:text-primary">Terms</Link>
           </div>
         </div>
       </div>

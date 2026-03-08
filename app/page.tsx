@@ -1,52 +1,22 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { EnhancedPropertyCard } from '@/components/enhanced-property-card'
-import { HeroSearch } from '@/components/hero-search'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Building2, 
-  MapPin, 
-  Search, 
-  ArrowRight, 
-  CheckCircle2,
-  Home,
-  Store,
-  Shield,
-  Clock,
-  TrendingUp,
-  Users,
-  Award,
-  Star,
-  Phone,
-  Mail
-} from 'lucide-react'
+import { Building2, Search, ArrowRight } from 'lucide-react'
 
 export default async function HomePage() {
   const supabase = await createClient()
   
+  // Fetch listings with limited data first
   const { data: listings } = await supabase
     .from('listings')
-    .select(`*, phase:phases(*), block:blocks(*), images:listing_images(*)`)
+    .select(`id, title, price, listing_type, property_type, plot_size_sqyd, shop_size_sqft, block_id, phase_id, created_at, block:blocks(name), phase:phases(name), images:listing_images(image_url, is_primary)`)
     .eq('status', 'approved')
     .order('created_at', { ascending: false })
     .limit(6)
-
-  const { data: phases } = await supabase
-    .from('phases')
-    .select('*')
-    .eq('is_active', true)
-    .order('display_order')
-
-  const { data: blocks } = await supabase
-    .from('blocks')
-    .select('*')
-    .eq('is_active', true)
-    .order('name')
 
   const { count: totalListings } = await supabase
     .from('listings')
@@ -58,69 +28,33 @@ export default async function HomePage() {
       <Header />
       
       <main className="flex-1">
-        {/* Full-Width Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-b border-border/40 overflow-hidden">
-          {/* Decorative Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-64 -right-64 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 py-24 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Left Content */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <Badge className="bg-primary/10 text-primary border-primary/30 font-semibold px-4 py-2">
-                    Welcome to North Town
-                  </Badge>
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                    Find Your <span className="text-primary">Perfect</span> <span className="text-secondary">Property</span>
-                  </h1>
-                  <p className="text-lg text-muted-foreground/80 leading-relaxed max-w-xl">
-                    Discover premium residential plots and commercial spaces in North Town Residency, Karachi's most sought-after community.
-                  </p>
-                </div>
-                
-                <div className="flex flex-wrap gap-4">
-                  <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg">
-                    <Link href="/listings" className="flex items-center gap-2">
-                      <Search className="h-5 w-5" />
-                      Browse Properties
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary/10 font-bold py-3 px-8 rounded-lg">
-                    <Link href="/auth/login" className="flex items-center gap-2">
-                      <Building2 className="h-5 w-5" />
-                      Post Property
-                    </Link>
-                  </Button>
-                </div>
-
-                <div className="flex gap-12 pt-8 border-t border-border">
-                  <div>
-                    <div className="text-3xl font-bold text-primary">{totalListings || 0}+</div>
-                    <p className="text-sm text-muted-foreground font-medium">Active Properties</p>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-secondary">3</div>
-                    <p className="text-sm text-muted-foreground font-medium">Phases</p>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-accent">1000+</div>
-                    <p className="text-sm text-muted-foreground font-medium">Happy Clients</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Image */}
-              <div className="relative h-96 lg:h-full min-h-96 rounded-2xl overflow-hidden glass-effect border border-border">
-                <img
-                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=500&fit=crop"
-                  alt="North Town Properties"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+        {/* CLEAN HERO - Simple Professional Design */}
+        <section className="bg-white border-b border-border/40">
+          <div className="container mx-auto px-4 py-16">
+            <div className="max-w-4xl">
+              <Badge className="bg-primary/10 text-primary border-primary/30 font-semibold mb-4">
+                North Town Residency
+              </Badge>
+              <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+                Find Your Property in North Town
+              </h1>
+              <p className="text-xl text-muted-foreground/80 mb-8 max-w-2xl">
+                Buy, sell, or rent residential plots and commercial properties. Safe, verified, and easy.
+              </p>
+              
+              <div className="flex flex-wrap gap-4">
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold py-6 px-8 text-lg rounded-lg">
+                  <Link href="/listings" className="flex items-center gap-2">
+                    <Search className="h-5 w-5" />
+                    Browse Properties
+                  </Link>
+                </Button>
+                <Button asChild className="bg-secondary hover:bg-secondary/90 text-white font-semibold py-6 px-8 text-lg rounded-lg">
+                  <Link href="/auth/login" className="flex items-center gap-2">
+                    <Building2 className="h-5 w-5" />
+                    Post Property
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -132,84 +66,54 @@ export default async function HomePage() {
         </section>
 
 
-        {/* Advanced Search Bar Section */}
-        <section className="bg-white border-b border-border/40">
+        {/* QUICK SEARCH - Simple Search Bar */}
+        <section className="bg-blue-50 border-b border-border/40">
           <div className="container mx-auto px-4 py-12">
-            <div className="glass-effect rounded-2xl p-8 border border-border/40">
-              <h2 className="text-2xl font-bold text-foreground mb-6">Advanced Search</h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">Location</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter location or block" 
-                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">Property Type</label>
-                  <select className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
-                    <option>All Types</option>
-                    <option>Residential Plot</option>
-                    <option>Commercial Shop</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">Phase</label>
-                  <select className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
-                    <option>All Phases</option>
-                    <option>Phase 1</option>
-                    <option>Phase 2</option>
-                    <option>Phase 4</option>
-                  </select>
-                </div>
-                <div className="flex items-end">
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg py-2.5">
-                    <Search className="h-4 w-4 mr-2" />
-                    Search
-                  </Button>
-                </div>
+            <h2 className="text-2xl font-bold text-foreground mb-6">Search Properties</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <input 
+                type="text" 
+                placeholder="Location or Block" 
+                className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+              />
+              <select className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
+                <option>All Property Types</option>
+                <option>Residential Plot</option>
+                <option>Commercial Shop</option>
+              </select>
+              <select className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50">
+                <option>For Sale / Rent</option>
+                <option>For Sale</option>
+                <option>For Rent</option>
+              </select>
+              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg">
+                <Search className="h-4 w-4 mr-2" />
+                Search
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* STATS - Simple Stats Section */}
+        <section className="py-12 bg-white border-b border-border/40">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-primary">{totalListings || 0}+</div>
+                <p className="text-sm text-muted-foreground mt-2">Active Properties</p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Information & Benefits Section */}
-        <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5 border-b border-border/40">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { icon: '🏆', title: 'Award Winning', desc: 'Recognized community' },
-                { icon: '🔒', title: '24/7 Security', desc: 'Safe environment' },
-                { icon: '🌳', title: 'Green Spaces', desc: 'Parks & recreation' },
-                { icon: '📍', title: 'Prime Location', desc: 'Easy access' }
-              ].map((item, i) => (
-                <div key={i} className="bg-white rounded-xl p-6 border border-border/40 hover:shadow-md transition-all">
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h3 className="font-bold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Quick Stats - Light Theme Cards */}
-        <section className="py-16 bg-white border-b border-border/40">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { number: totalListings || 0, label: 'Active Properties', icon: '🏠' },
-                { number: 3, label: 'Phases', icon: '📍' },
-                { number: '100%', label: 'Verified', icon: '✓' },
-                { number: '1000+', label: 'Happy Buyers', icon: '👥' }
-              ].map((stat, i) => (
-                <div key={i} className="bg-gradient-to-br from-primary/5 to-transparent rounded-xl p-6 border border-primary/20 hover:border-primary/40 hover:shadow-md transition-all text-center">
-                  <div className="text-4xl mb-2">{stat.icon}</div>
-                  <div className="text-3xl font-bold text-primary mb-1">{stat.number}</div>
-                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
+              <div>
+                <div className="text-4xl font-bold text-secondary">3</div>
+                <p className="text-sm text-muted-foreground mt-2">Phases</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-accent">100%</div>
+                <p className="text-sm text-muted-foreground mt-2">Verified</p>
+              </div>
+              <div className="hidden md:block">
+                <div className="text-4xl font-bold text-primary">1000+</div>
+                <p className="text-sm text-muted-foreground mt-2">Happy Clients</p>
+              </div>
             </div>
           </div>
         </section>
@@ -354,27 +258,23 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Featured Properties Section */}
+        {/* FEATURED PROPERTIES - Clean Grid */}
         {listings && listings.length > 0 && (
-          <section className="py-20 bg-blue-50 border-b border-border/40">
+          <section className="py-16 bg-white border-b border-border/40">
             <div className="container mx-auto px-4">
-              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 gap-8">
-                <div>
-                  <span className="inline-block px-4 py-2 rounded-full bg-primary/15 text-primary font-semibold text-sm mb-4">Featured Listings</span>
-                  <h2 className="text-5xl font-bold text-foreground mb-3">Latest Properties</h2>
-                  <p className="text-lg text-muted-foreground/80">Handpicked premium properties for our clients</p>
-                </div>
-                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-lg w-full lg:w-fit">
-                  <Link href="/listings" className="flex items-center justify-center lg:justify-start gap-2">
+              <div className="flex items-center justify-between mb-10">
+                <h2 className="text-3xl font-bold text-foreground">Latest Properties</h2>
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg">
+                  <Link href="/listings" className="flex items-center gap-2">
                     View All
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {listings.map((listing, index) => (
-                  <div key={listing.id} className="animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {listings.map((listing) => (
+                  <div key={listing.id}>
                     <EnhancedPropertyCard listing={listing} />
                   </div>
                 ))}
@@ -383,31 +283,20 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* CTA Section - WordPress Style */}
-        <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5 border-t border-border/40">
-          <div className="container mx-auto px-4">
-            <div className="bg-gradient-to-r from-primary via-primary/90 to-secondary rounded-2xl p-12 md:p-16 text-white relative overflow-hidden shadow-lg">
-              {/* Decoration */}
-              <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
-              </div>
-              
-              <div className="max-w-3xl relative z-10">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                  Have a Property to Sell?
-                </h2>
-                <p className="text-lg text-white/90 mb-8 leading-relaxed">
-                  Join thousands of satisfied property owners on North Town Properties. List your residential plots or commercial spaces completely free and connect with serious buyers in minutes.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-white hover:bg-white/95 text-primary font-bold py-3 px-8 rounded-lg">
-                    <Link href="/auth/login">Post Your Property Free</Link>
-                  </Button>
-                  <Button asChild variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg">
-                    <Link href="/listings">Browse Properties</Link>
-                  </Button>
-                </div>
-              </div>
+        {/* CTA SECTION - Simple Call to Action */}
+        <section className="py-16 bg-primary text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold mb-4">Have a Property to List?</h2>
+            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+              Join thousands of property owners. Post your property for free and reach serious buyers instantly.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild className="bg-white hover:bg-white/95 text-primary font-bold py-3 px-8 rounded-lg">
+                <Link href="/auth/login">Post Property Free</Link>
+              </Button>
+              <Button asChild variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg">
+                <Link href="/listings">Browse Properties</Link>
+              </Button>
             </div>
           </div>
         </section>

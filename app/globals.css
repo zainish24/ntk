@@ -4,39 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Modern Real Estate Theme - Professional Blue & White (Zameen.com Style) */
-  --background: 249 250 251; /* #F9FAFB - Clean White */
-  --foreground: 17 24 39; /* #111827 - Deep Gray-Blue */
-  --card: 255 255 255; /* #FFFFFF - Pure White */
-  --card-foreground: 17 24 39;
-  --popover: 255 255 255;
-  --popover-foreground: 17 24 39;
-  --primary: 37 99 235; /* #2563EB - Professional Blue */
-  --primary-foreground: 255 255 255;
-  --secondary: 226 232 240; /* #E2E8F0 - Light Blue-Gray */
-  --secondary-foreground: 17 24 39;
+  /* Premium Vibrant Real Estate Theme - Dark Navy with Purple & Teal */
+  --background: 13 15 35; /* #0D0F23 - Deep Navy-Black */
+  --foreground: 248 250 255; /* #F8FAFF - Almost White */
+  --card: 30 35 65; /* #1E2341 - Dark Navy */
+  --card-foreground: 248 250 255;
+  --popover: 30 35 65;
+  --popover-foreground: 248 250 255;
+  --primary: 139 92 246; /* #8B5CF6 - Vibrant Purple */
+  --primary-foreground: 248 250 255;
+  --secondary: 6 182 212; /* #06B6D4 - Vibrant Cyan/Teal */
+  --secondary-foreground: 13 15 35;
   --muted: 148 163 184; /* #94A3B8 - Medium Gray */
-  --muted-foreground: 71 85 105;
-  --accent: 16 185 129; /* #10B981 - Emerald Green */
-  --accent-foreground: 255 255 255;
+  --muted-foreground: 200 210 230;
+  --accent: 245 158 11; /* #F59E0B - Vibrant Gold/Amber */
+  --accent-foreground: 13 15 35;
+  --success: 34 197 94; /* #22C55E - Vibrant Green */
   --destructive: 239 68 68;
   --destructive-foreground: 255 255 255;
-  --border: 226 232 240; /* Light Blue-Gray Border */
-  --input: 226 232 240;
-  --ring: 37 99 235;
-  --radius: 0.75rem; /* 12px rounded cards */
+  --border: 59 70 120; /* Dark Purple-Blue Border */
+  --input: 30 35 65;
+  --ring: 139 92 246;
+  --radius: 0.875rem; /* 14px rounded cards */
 }
 
 .dark {
-  --background: 15 23 42;
-  --foreground: 248 250 252;
-  --card: 30 41 59;
-  --card-foreground: 248 250 252;
-  --primary: 59 130 246;
-  --primary-foreground: 255 255 255;
-  --accent: 16 185 129;
-  --accent-foreground: 248 250 252;
-  --border: 51 65 85;
+  --background: 13 15 35;
+  --foreground: 248 250 255;
+  --card: 30 35 65;
+  --card-foreground: 248 250 255;
+  --primary: 168 85 247;
+  --primary-foreground: 13 15 35;
+  --accent: 245 158 11;
+  --accent-foreground: 13 15 35;
+  --border: 59 70 120;
 }
 
 @theme inline {
@@ -111,8 +112,25 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.5); }
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes neon-glow {
+  0%, 100% { 
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 
+                0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 
+                0 0 40px rgba(6, 182, 212, 0.5);
+  }
 }
 @keyframes shimmer {
   0% { background-position: -1000px 0; }
@@ -133,6 +151,8 @@
 .animate-float-up { animation: float-up 0.6s ease-out forwards; }
 .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
 .animate-scale-in { animation: scale-in 0.5s ease-out forwards; }
+.animate-gradient { animation: gradient-shift 3s ease infinite; background-size: 200% 200%; }
+.animate-neon { animation: neon-glow 2s ease-in-out infinite; }
 
 .animation-delay-100 { animation-delay: 100ms; }
 .animation-delay-200 { animation-delay: 200ms; }
@@ -143,12 +163,20 @@
 .animation-delay-700 { animation-delay: 700ms; }
 .animation-delay-800 { animation-delay: 800ms; }
 
-/* Glass Morphism Effect */
+/* Premium Glass Morphism Effect */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  background: rgba(30, 35, 65, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+}
+
+.glass-effect-light {
+  background: rgba(248, 250, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(6, 182, 212, 0.15);
 }
 
 /* Smooth Transitions */
@@ -183,18 +211,19 @@
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(249, 250, 251, 0.5);
+  background: rgba(30, 35, 65, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(37, 99, 235);
-  border-radius: 4px;
+  background: linear-gradient(180deg, rgb(139, 92, 246), rgb(6, 182, 212));
+  border-radius: 5px;
+  border: 2px solid rgba(30, 35, 65, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(29, 78, 216);
+  background: linear-gradient(180deg, rgb(168, 85, 247), rgb(34, 211, 238));
 }

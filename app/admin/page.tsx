@@ -41,63 +41,74 @@ export default async function AdminDashboard() {
   ]
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Overview of NTR Properties platform</p>
+    <div className="space-y-10">
+      {/* Header */}
+      <div className="space-y-2">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Admin Dashboard</h1>
+        <p className="text-muted-foreground/80">Real-time overview of NTR Properties platform</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {stats.map((stat) => {
+      {/* Stats Grid - Vibrant Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+        {stats.map((stat, idx) => {
           const Icon = stat.icon
+          const colors = [
+            'from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 hover:shadow-primary/20',
+            'from-secondary/20 to-secondary/5 border-secondary/30 hover:border-secondary/50 hover:shadow-secondary/20',
+            'from-accent/20 to-accent/5 border-accent/30 hover:border-accent/50 hover:shadow-accent/20',
+            'from-primary/15 to-secondary/15 border-primary/20 hover:border-primary/40 hover:shadow-primary/15',
+            'from-secondary/15 to-accent/15 border-secondary/20 hover:border-secondary/40 hover:shadow-secondary/15',
+            'from-accent/15 to-primary/15 border-accent/20 hover:border-accent/40 hover:shadow-accent/15'
+          ]
+          
           return (
-            <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {stat.title}
-                </CardTitle>
-                <Icon className={`h-4 w-4 ${stat.color}`} />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stat.value}</div>
-                {stat.subtitle && (
-                  <p className="text-xs text-muted-foreground mt-1">{stat.subtitle}</p>
-                )}
-              </CardContent>
-            </Card>
+            <div key={stat.title} className={`glass-effect rounded-xl p-6 border ${colors[idx % colors.length]} hover:shadow-lg transition-all duration-300`}>
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">{stat.title}</p>
+                </div>
+                <Icon className="h-5 w-5 text-muted-foreground/50" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+              {stat.subtitle && (
+                <p className="text-xs text-muted-foreground/60">{stat.subtitle}</p>
+              )}
+            </div>
           )
         })}
       </div>
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>Recent Submissions</CardTitle>
-            <Link href="/admin/listings" className="text-sm text-primary hover:underline">
-              View All
-            </Link>
+      {/* Recent Submissions */}
+      <div className="glass-effect rounded-2xl border-border/30 p-8">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-foreground">Recent Submissions</h2>
+            <p className="text-sm text-muted-foreground/70 mt-1">Latest property listings awaiting review</p>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {recentListings?.map((listing) => (
-              <div key={listing.id} className="flex items-center justify-between border-b pb-4 last:border-0">
-                <div className="space-y-1">
-                  <div className="font-medium">{listing.title}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {listing.phase?.name} - {listing.block?.name} • {listing.profile?.full_name || listing.profile?.phone}
-                  </div>
-                </div>
-                <Badge variant={
-                  listing.status === 'pending' ? 'secondary' :
-                  listing.status === 'approved' ? 'default' : 'destructive'
-                }>
-                  {listing.status}
-                </Badge>
+          <Link href="/admin/listings" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors px-4 py-2 rounded-lg hover:bg-primary/10">
+            View All →
+          </Link>
+        </div>
+        <div className="space-y-3">
+          {recentListings?.map((listing) => (
+            <div key={listing.id} className="flex items-center justify-between p-4 rounded-xl bg-card/30 hover:bg-card/50 border border-border/20 hover:border-primary/30 transition-all">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-foreground truncate hover:text-primary transition-colors">{listing.title}</h3>
+                <p className="text-sm text-muted-foreground/70 mt-1">
+                  {listing.phase?.name} • {listing.block?.name} • {listing.profile?.full_name || listing.profile?.phone}
+                </p>
               </div>
-            ))}
-            {!recentListings?.length && (
-              <div className="text-center text-muted-foreground py-8">
+              <Badge className={`ml-4 font-semibold ${
+                listing.status === 'pending' ? 'bg-amber-500/20 text-amber-200 border-amber-500/30' :
+                listing.status === 'approved' ? 'bg-emerald-500/20 text-emerald-200 border-emerald-500/30' : 
+                'bg-red-500/20 text-red-200 border-red-500/30'
+              } border`}>
+                {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+              </Badge>
+            </div>
+          ))}
+          {!recentListings?.length && (
+            <div className="text-center text-muted-foreground py-12">
                 No recent submissions
               </div>
             )}

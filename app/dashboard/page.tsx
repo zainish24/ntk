@@ -38,37 +38,39 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="space-y-10">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-bold">My Listings</h1>
-          <p className="text-muted-foreground">Manage your property listings</p>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">My Listings</h1>
+          <p className="text-muted-foreground/80 mt-2">Manage and track your property listings</p>
         </div>
-        <Button asChild>
-          <Link href="/dashboard/post">
-            <PlusCircle className="h-4 w-4 mr-2" />
+        <Button asChild className="w-fit bg-gradient-to-r from-secondary to-accent hover:shadow-lg hover:shadow-secondary/30 text-foreground font-semibold">
+          <Link href="/dashboard/post" className="flex items-center gap-2">
+            <PlusCircle className="h-5 w-5" />
             Post New Listing
           </Link>
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Listings</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.total}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Active Ads</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
-          </CardContent>
-        </Card>
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+        {[
+          { label: 'Total Listings', value: stats.total, color: 'from-primary/20 to-primary/5 border-primary/30', icon: '📊' },
+          { label: 'Active Ads', value: stats.approved, color: 'from-emerald-500/20 to-emerald-500/5 border-emerald-500/30', icon: '✅' },
+          { label: 'Pending Review', value: stats.pending, color: 'from-amber-500/20 to-amber-500/5 border-amber-500/30', icon: '⏳' },
+          { label: 'Rejected', value: stats.rejected, color: 'from-red-500/20 to-red-500/5 border-red-500/30', icon: '❌' }
+        ].map((stat, idx) => (
+          <div key={idx} className={`glass-effect rounded-xl p-6 border ${stat.color} hover:shadow-lg transition-all`}>
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">{stat.label}</p>
+                <div className="text-3xl font-bold text-foreground mt-2">{stat.value}</div>
+              </div>
+              <span className="text-2xl">{stat.icon}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="space-y-4">

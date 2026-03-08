@@ -71,65 +71,70 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-card/98 backdrop-blur-sm supports-[backdrop-filter]:bg-card/95 shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group hover:scale-105 smooth-transition">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-lg">
-              <Building2 className="h-6 w-6" />
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="h-10 w-10 rounded-lg bg-primary text-white flex items-center justify-center font-bold">
+              NTR
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold leading-none text-foreground group-hover:text-primary smooth-transition">NTR Properties</span>
-              <span className="text-xs text-muted-foreground">North Town Residency</span>
+            <div>
+              <span className="text-lg font-bold text-foreground">NTR Properties</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link 
-              href="/" 
-              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Home className="h-4 w-4" />
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link 
-              href="/listings" 
-              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Building2 className="h-4 w-4" />
+            <Link href="/listings" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Properties
             </Link>
-            <Link 
-              href="/dashboard" 
-              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <LayoutDashboard className="h-4 w-4" />
-              Dashboard
-            </Link>
-            <Link 
-              href="/dashboard/post" 
-              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <PlusCircle className="h-4 w-4" />
-              Post Ad
-            </Link>
-            <Link 
-              href="/admin" 
-              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Shield className="h-4 w-4" />
-              Admin Panel
-            </Link>
+            {user && (
+              <>
+                <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                  Dashboard
+                </Link>
+                <Link href="/admin" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                  Admin
+                </Link>
+              </>
+            )}
           </nav>
 
           {/* Desktop Auth */}
           <div className="hidden md:flex items-center gap-3">
-            <Button onClick={handleSignOut} className="gap-2 cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg smooth-transition">
-              <LogOut className="h-4 w-4" />
-              Sign Out
-            </Button>
+            {user ? (
+              <>
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/dashboard/post">Post Property</Link>
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <UserIcon className="h-4 w-4" />
+                      Account
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
+                <Link href="/auth/login">Sign In</Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}

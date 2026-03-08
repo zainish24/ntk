@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { EnhancedPropertyCard } from '@/components/enhanced-property-card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Building2, Search, ArrowRight } from 'lucide-react'
+import { Building2, Search, ArrowRight, MapPin, Home, Store, Shield, TrendingUp, Users, CheckCircle2 } from 'lucide-react'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -28,34 +29,120 @@ export default async function HomePage() {
       <Header />
       
       <main className="flex-1">
-        {/* CLEAN HERO - Simple Professional Design */}
-        <section className="bg-white border-b border-border/40">
-          <div className="container mx-auto px-4 py-16">
-            <div className="max-w-4xl">
-              <Badge className="bg-primary/10 text-primary border-primary/30 font-semibold mb-4">
-                North Town Residency
-              </Badge>
-              <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Find Your Property in North Town
-              </h1>
-              <p className="text-xl text-muted-foreground/80 mb-8 max-w-2xl">
-                Buy, sell, or rent residential plots and commercial properties. Safe, verified, and easy.
-              </p>
-              
-              <div className="flex flex-wrap gap-4">
-                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold py-6 px-8 text-lg rounded-lg">
-                  <Link href="/listings" className="flex items-center gap-2">
-                    <Search className="h-5 w-5" />
-                    Browse Properties
-                  </Link>
-                </Button>
-                <Button asChild className="bg-secondary hover:bg-secondary/90 text-white font-semibold py-6 px-8 text-lg rounded-lg">
-                  <Link href="/auth/login" className="flex items-center gap-2">
-                    <Building2 className="h-5 w-5" />
-                    Post Property
-                  </Link>
+        {/* PREMIUM HERO SECTION */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 pt-0 pb-20">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-96 -right-96 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-96 -left-96 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
+              {/* Left Content */}
+              <div className="space-y-8 animate-slide-right">
+                <div className="space-y-4">
+                  <Badge className="bg-primary/15 text-primary border border-primary/30 font-bold px-4 py-2 text-sm">
+                    Welcome to North Town
+                  </Badge>
+                  <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                    <span className="block text-foreground">Your Dream</span>
+                    <span className="block gradient-text">Property Awaits</span>
+                  </h1>
+                  <p className="text-xl text-muted-foreground/80 leading-relaxed max-w-lg">
+                    Explore premium residential plots and commercial spaces in North Town Residency. Verified, transparent, and trusted by thousands.
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-xl text-lg btn-premium">
+                    <Link href="/listings" className="flex items-center justify-center gap-2">
+                      <Search className="h-5 w-5" />
+                      Browse Properties
+                    </Link>
+                  </Button>
+                  <Button asChild className="border-2 border-primary text-primary hover:bg-primary/10 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300">
+                    <Link href="/auth/login" className="flex items-center justify-center gap-2">
+                      <Building2 className="h-5 w-5" />
+                      Post a Property
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border/30">
+                  <div className="space-y-1">
+                    <div className="text-3xl font-bold text-primary">{totalListings || 0}+</div>
+                    <p className="text-sm text-muted-foreground font-medium">Properties</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-3xl font-bold text-secondary">3</div>
+                    <p className="text-sm text-muted-foreground font-medium">Phases</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-3xl font-bold text-accent">100%</div>
+                    <p className="text-sm text-muted-foreground font-medium">Verified</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Image */}
+              <div className="relative h-96 lg:h-full min-h-96 rounded-2xl overflow-hidden shadow-2xl animate-slide-left">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1560488204-e02f11c3d0e2?w=800&h=600&fit=crop"
+                  alt="Premium North Town Properties"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEARCH BAR SECTION */}
+        <section className="py-16 bg-white border-b border-border/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Find Your Perfect Property</h2>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl border border-border/40">
+                <input 
+                  type="text" 
+                  placeholder="Search by location or block..." 
+                  className="px-4 py-3.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white font-medium"
+                />
+                <select className="px-4 py-3.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white font-medium">
+                  <option>All Types</option>
+                  <option>Residential Plot</option>
+                  <option>Commercial Shop</option>
+                </select>
+                <select className="px-4 py-3.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white font-medium">
+                  <option>Sale / Rent</option>
+                  <option>For Sale</option>
+                  <option>For Rent</option>
+                </select>
+                <Button className="bg-primary hover:bg-primary/90 text-white font-bold rounded-xl py-3.5 btn-premium">
+                  <Search className="h-5 w-5 mr-2" />
+                  Search
                 </Button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* STATS SECTION */}
+        <section className="py-16 bg-gradient-to-r from-primary/5 to-secondary/5">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { number: totalListings || 0, label: 'Active Listings', icon: '🏠' },
+                { number: 3, label: 'Premium Phases', icon: '📍' },
+                { number: '100%', label: 'Verified Properties', icon: '✓' },
+                { number: '1000+', label: 'Happy Clients', icon: '👥' }
+              ].map((stat, i) => (
+                <div key={i} className="bg-white rounded-xl p-6 border border-border/40 hover:border-primary/40 hover:shadow-lg transition-all text-center card-hover">
+                  <div className="text-4xl mb-3">{stat.icon}</div>
+                  <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
+                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -258,23 +345,60 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* FEATURED PROPERTIES - Clean Grid */}
+        {/* WHY CHOOSE US SECTION */}
+        <section className="py-20 bg-white border-b border-border/20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold text-foreground mb-4">Why Choose North Town?</h2>
+              <p className="text-xl text-muted-foreground/80 max-w-2xl mx-auto">
+                Experience a transparent, secure, and trustworthy property marketplace
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { icon: Shield, title: '100% Verified', desc: 'All properties are verified by our expert team' },
+                { icon: TrendingUp, title: 'Best Prices', desc: 'Get market-competitive prices with no hidden fees' },
+                { icon: Users, title: 'Trusted Community', desc: 'Join 1000+ satisfied buyers and sellers' },
+                { icon: MapPin, title: 'Prime Location', desc: 'North Town - the most sought-after destination' },
+                { icon: CheckCircle2, title: 'Easy Process', desc: 'Simple, transparent transaction process' },
+                { icon: Home, title: '24/7 Support', desc: 'Expert support whenever you need us' }
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-border/40 hover:border-primary/40 hover:shadow-lg transition-all card-hover">
+                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-4">
+                      <Icon className="h-7 w-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground/80">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURED PROPERTIES SECTION */}
         {listings && listings.length > 0 && (
-          <section className="py-16 bg-white border-b border-border/40">
+          <section className="py-20 bg-gradient-to-br from-background to-primary/5 border-b border-border/20">
             <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-10">
-                <h2 className="text-3xl font-bold text-foreground">Latest Properties</h2>
-                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg">
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
+                <div>
+                  <h2 className="text-5xl font-bold text-foreground mb-3">Featured Properties</h2>
+                  <p className="text-lg text-muted-foreground/80">Browse our latest premium listings</p>
+                </div>
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-xl mt-6 md:mt-0 btn-premium">
                   <Link href="/listings" className="flex items-center gap-2">
-                    View All
-                    <ArrowRight className="h-4 w-4" />
+                    View All Listings
+                    <ArrowRight className="h-5 w-5" />
                   </Link>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {listings.map((listing) => (
-                  <div key={listing.id}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {listings.map((listing, idx) => (
+                  <div key={listing.id} className="animate-slide-up" style={{ animationDelay: `${idx * 100}ms` }}>
                     <EnhancedPropertyCard listing={listing} />
                   </div>
                 ))}
@@ -283,19 +407,92 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* CTA SECTION - Simple Call to Action */}
-        <section className="py-16 bg-primary text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-4">Have a Property to List?</h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Join thousands of property owners. Post your property for free and reach serious buyers instantly.
+        {/* ABOUT NORTH TOWN SECTION */}
+        <section className="py-20 bg-white border-b border-border/20">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=500&fit=crop"
+                  alt="North Town Community"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <Badge className="bg-secondary/15 text-secondary border border-secondary/30 font-bold mb-4">
+                    About North Town
+                  </Badge>
+                  <h2 className="text-5xl font-bold text-foreground mb-4 leading-tight">
+                    Pakistan's Premier <span className="gradient-text">Residential Community</span>
+                  </h2>
+                </div>
+                <p className="text-lg text-muted-foreground/80 leading-relaxed">
+                  North Town Residency represents the pinnacle of modern urban living in Karachi. With meticulously planned phases, world-class amenities, and a vibrant community, it's where aspirations meet reality.
+                </p>
+                <ul className="space-y-3">
+                  {['Premium residential plots in multiple sizes', 'Commercial spaces for entrepreneurs', 'State-of-the-art security systems', 'Complete infrastructure and utilities', 'Parks, schools, and shopping areas'].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-6 w-6 text-secondary shrink-0" />
+                      <span className="text-muted-foreground/80 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PROPERTY TYPES SECTION */}
+        <section className="py-20 bg-gradient-to-r from-blue-50 to-green-50 border-b border-border/20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold text-foreground mb-4">Property Types</h2>
+              <p className="text-xl text-muted-foreground/80 max-w-2xl mx-auto">
+                Choose from residential plots or commercial spaces
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {[
+                { title: 'Residential Plots', desc: 'Premium plots in 80, 100, and 120 Sq Yd', icon: Home, color: 'primary', count: '450+' },
+                { title: 'Commercial Shops', desc: 'Prime business locations for your ventures', icon: Store, color: 'secondary', count: '200+' }
+              ].map((type, i) => {
+                const Icon = type.icon;
+                return (
+                  <Link key={i} href={`/listings?property_type=${type.title.toLowerCase().replace(' ', '_')}`}>
+                    <div className={`group bg-white rounded-2xl p-10 border-2 hover:border-${type.color} hover:shadow-2xl transition-all cursor-pointer card-hover`}>
+                      <div className={`flex items-center justify-center w-16 h-16 rounded-xl bg-${type.color}/10 text-${type.color} mb-6 group-hover:scale-110 transition-transform`}>
+                        <Icon className="h-8 w-8" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{type.title}</h3>
+                      <p className="text-muted-foreground/80 mb-4">{type.desc}</p>
+                      <div className={`text-lg font-bold text-${type.color}`}>{type.count} Available</div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* FINAL CTA SECTION */}
+        <section className="py-20 bg-gradient-to-r from-primary via-primary to-secondary text-white relative overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <h2 className="text-5xl font-bold mb-6">Ready to Find Your Property?</h2>
+            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+              Browse thousands of verified properties or post your own. Join North Town's trusted community today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-white hover:bg-white/95 text-primary font-bold py-3 px-8 rounded-lg">
-                <Link href="/auth/login">Post Property Free</Link>
-              </Button>
-              <Button asChild variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg">
+              <Button asChild className="bg-white hover:bg-white/95 text-primary font-bold py-4 px-10 rounded-xl text-lg btn-premium">
                 <Link href="/listings">Browse Properties</Link>
+              </Button>
+              <Button asChild className="border-2 border-white text-white hover:bg-white/10 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300">
+                <Link href="/auth/login">Post Your Property</Link>
               </Button>
             </div>
           </div>
